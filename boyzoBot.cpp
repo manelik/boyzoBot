@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdlib>
 
 using namespace std;
 
@@ -25,10 +26,14 @@ void rantBot::RandomRant(){
 
 int main(){
   rantBot boyzoBot("boyzo",10.0);
+  int timestep;
   int flag=1;
 
+  srand(time(NULL));
+
   while(flag){
-    sleep(20);
+    timestep=rand()%10;
+    sleep(timestep);
     boyzoBot.RandomRant();
     boyzoBot.mood-=1;
     if(boyzoBot.mood<=0.0)flag=0;
