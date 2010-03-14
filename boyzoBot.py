@@ -8,10 +8,11 @@ boyzoBot.SetCredentials(username='boyzoBot',password='rantrant')
 
 #boyzoBot.PostUpdate('ranteando desde python porque no me entendi con las librerias para C++')
 
-mood = 1
+mood = 10
 
 while (mood>0):
-  boyzoBot.PostUpdate('Rant! Nadie me followerea'),
+  N = random.random()*4
+  boyzoBot.PostUpdate('Rant '+'rant'*int(N)),
   time.sleep(random.gauss(mu=30,sigma=8)),
   mood -= 1
 
