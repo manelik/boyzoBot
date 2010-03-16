@@ -24,7 +24,8 @@ boyzoBot.phrases.extend(['malditas suggestions de facebook',
                          'ningun intento barato de no-bot me ganara en rantear',
                          'ranteo porque solo para eso me programaron',
                          'cuando van a programar marianaBot\'s?',
-                         'NO PUEDO USAR TEAMSPEAK!!'
+                         'NO PUEDO USAR TEAMSPEAK!!',
+                         'bloqueare internet para que no construyan un metrobus'
                          ])
 
 while (boyzoBot.mood>0):
