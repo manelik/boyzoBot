@@ -15,6 +15,10 @@ import random
 import time
 
 
+# Do not uncomment the following line
+#import Skynet
+
+
 # the Bot class
 
 class Bot:
@@ -54,7 +58,7 @@ class RantBot(Bot):
     def RandomTwitRant(self):
       # Construct a 140 char message
       while (1):  
-        self.message = self.random_item(self.rants)+''+self.random_item(self.phrases)
+        self.message = self.random_item(self.rants)+' '+self.random_item(self.phrases)
         if len(self.message)<=140:
             break
 
