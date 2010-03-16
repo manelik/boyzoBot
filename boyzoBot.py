@@ -7,20 +7,28 @@ boyzoBot.tpass = ''
 
 boyzoBot.twit_authenticate()
 
-boyzoBot.rants = ['rant!','AHH','odio esto','no puede ser','maldicion','maldita sea']
+if boyzoBot.tuser <> 'boyzoBot' : boyzoBot.twit_twit('Soy @boyzoBot
+pero algun inepto me esta corriendo en otra cuenta')
 
-boyzoBot.phrases = ['malditos sugest\'s de facebook',
-                    'siempre hay trafico en internet',
-                    'necesito un update!!'
-                    ]
+boyzoBot.rants.extend( ['rant!','AHH','odio esto',
+                        'no puede ser,','maldicion','maldita sea']
+                       )
+
+boyzoBot.phrases.extend(['malditos sugest\'s de facebook',
+                         'siempre hay trafico en internet',
+                         'necesito un update!!'
+                         'ya me harte de esto',
+                         'necesito un cigarro',
+                         'voy por un cigarro',
+                         'me echare un rato, luego a ver que sale',
+                         'ningun intento barato de no-bot me ganara en rantear',
+                         'ranteo porque solo para eso me programaron'
+                         ])
 
 while (mood>0):
-  N = random.random()*4
-  boyzoBot.PostUpdate('Rant '+'rant '*int(N)),
-  time.sleep(random.gauss(mu=500,sigma=8)),
+  boyzoBot.RandomTwitRant()
+  boyzoBot.Bot_sleep_random()
   mood -= 1
 
 
-boyzoBot.PostUpdate('Ya me canse, ranteare manana')
-
-boyzoBot.ClearCredentials()
+boyzoBot.deauthenticate()

@@ -30,6 +30,12 @@ class Bot:
     def twit_authenticate():
       tApi.SetCredentials(username=tuser,password=tpass)
 
+    def twit_deauthenticate():
+      tApi.ClearCredentials()
+
+    def twit_twit(token):
+      tApi.PostUpdate(token)
+
     def Bot_sleep_random():
       time.sleep(random.gauss(mu=500,sigma=100))
 
