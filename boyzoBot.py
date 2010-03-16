@@ -13,12 +13,12 @@ if boyzoBot.tuser <> 'boyzoBot' : boyzoBot.twit_twit(
 
 #Just for testing
 boyzoBot.rants.extend(['rant!','AHH','odio esto,',
-                        'no puede ser,,','maldicion,','maldita sea,'
+                        'no puede ser,','maldicion,','maldita sea,'
                        ])
 
 boyzoBot.phrases.extend(['malditas suggestions de facebook',
                          'siempre hay trafico en internet',
-                         'necesito un update!!'
+                         'necesito un update!!',
                          'ya me harte de esto',
                          'necesito un cigarro',
                          'voy por un cigarro',
