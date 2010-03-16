@@ -1,14 +1,18 @@
-import twitter
-import time
-import random
+import stdBot
 
-boyzoBot= twitter.Api()
+boyzoBot = RantBot()
 
-boyzoBot.SetCredentials(username='boyzoBot',password='')
+boyzoBot.tuser = 'boyzoBot'
+boyzoBot.tpass = ''
 
-boyzoBot.PostUpdate('Maldita sea, no puedo acceder al TeamSpeak')
+boyzoBot.twit_authenticate()
 
-mood = 0
+boyzoBot.rants = ['rant!','AHH','odio esto','no puede ser','maldicion','maldita sea']
+
+boyzoBot.phrases = ['malditos sugest\'s de facebook',
+                    'siempre hay trafico en internet',
+                    'necesito un update!!'
+                    ]
 
 while (mood>0):
   N = random.random()*4
