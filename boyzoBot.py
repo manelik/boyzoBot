@@ -3,7 +3,7 @@ import stdBot
 boyzoBot = stdBot.RantBot()
 
 boyzoBot.tuser = 'boyzoBot'
-boyzoBot.tpass = ''
+boyzoBot.tpass = 'RaNtRaNt'
 
 boyzoBot.twit_authenticate()
 
