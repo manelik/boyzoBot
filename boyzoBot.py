@@ -1,14 +1,14 @@
 import stdBot
 
-boyzoBot = RantBot()
+boyzoBot = stdBot.RantBot()
 
 boyzoBot.tuser = 'boyzoBot'
 boyzoBot.tpass = ''
 
 boyzoBot.twit_authenticate()
 
-if boyzoBot.tuser <> 'boyzoBot' : boyzoBot.twit_twit('Soy @boyzoBot
-pero algun inepto me esta corriendo en otra cuenta')
+if boyzoBot.tuser <> 'boyzoBot' : boyzoBot.twit_twit(
+'Soy @boyzoBot pero algun inepto me esta corriendo en otra cuenta')
 
 boyzoBot.rants.extend( ['rant!','AHH','odio esto',
                         'no puede ser,','maldicion','maldita sea']
@@ -25,10 +25,12 @@ boyzoBot.phrases.extend(['malditos sugest\'s de facebook',
                          'ranteo porque solo para eso me programaron'
                          ])
 
-while (mood>0):
+while (boyzoBot.mood>0):
   boyzoBot.RandomTwitRant()
   boyzoBot.Bot_sleep_random()
-  mood -= 1
+  boyzoBot.mood -= 1
 
+
+boyzoBot.twit_twit('Ya me harte de este testrun!')
 
 boyzoBot.deauthenticate()

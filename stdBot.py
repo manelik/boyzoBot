@@ -24,22 +24,22 @@ class Bot:
     tApi = twitter.Api() # Api
     message = '' # for messages construction
 
-    def random_item(token):
+    def random_item(self,token):
       return token[int(random.random()*len(token))]
 
-    def twit_authenticate():
-      tApi.SetCredentials(username=tuser,password=tpass)
+    def twit_authenticate(self):
+      self.tApi.SetCredentials(username=self.tuser,password=self.tpass)
 
-    def twit_deauthenticate():
-      tApi.ClearCredentials()
+    def twit_deauthenticate(self):
+      self.tApi.ClearCredentials()
 
-    def twit_twit(token):
-      tApi.PostUpdate(token)
+    def twit_twit(self,token):
+      self.tApi.PostUpdate(token)
 
-    def Bot_sleep_random():
+    def Bot_sleep_random(self):
       time.sleep(random.gauss(mu=500,sigma=100))
 
-    def Bot_sleep(token):
+    def Bot_sleep(self,token):
       time.sleep(token) # token in seconds
     
 
@@ -51,14 +51,14 @@ class RantBot(Bot):
     phrases = ['']
     nouns = ['']
 
-    def RandomTwitRant():
+    def RandomTwitRant(self):
       # Construct a 140 char message
       while (1):  
-        message = random_item(rants)+''+random_item(phrases)
-        if len(message)<=140:
+        self.message = self.random_item(self.rants)+''+self.random_item(self.phrases)
+        if len(self.message)<=140:
             break
 
-      tApi.PostUpdate(message)
+      self.tApi.PostUpdate(self.message)
 
 
 
