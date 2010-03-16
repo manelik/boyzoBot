@@ -25,7 +25,8 @@ boyzoBot.phrases.extend(['malditas suggestions de facebook',
                          'ranteo porque solo para eso me programaron',
                          'cuando van a programar marianaBot\'s?',
                          'NO PUEDO USAR TEAMSPEAK!!',
-                         'bloqueare internet para que no construyan un metrobus'
+                         'bloqueare google para que no construyan un metrobus'+
+                         ' que pase por mi dominio'
                          ])
 
 while (boyzoBot.mood>0):
@@ -36,4 +37,4 @@ while (boyzoBot.mood>0):
 
 boyzoBot.twit_twit('Ya me harte de este testrun!')
 
-boyzoBot.deauthenticate()
+boyzoBot.twit_deauthenticate()
