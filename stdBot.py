@@ -93,18 +93,18 @@ class RantBot(Bot):
         # Construct a 140 char message
         while (1):  
             self.message = self.random_item(self.rants)+' '+self.random_item(self.phrases)
-            if len(self.message)<=140: break
-            
-            self.tApi.PostUpdate(self.message)
+            if len(self.message)<=140: 
+                break
+        self.tApi.PostUpdate(self.message)
 
     def RandomFakeRTwit(self,target):
         # Construct a 140 char message
         while (1):  
             self.message = ('RT @'+target+': '+self.random_item(self.rants)+
                             ' '+self.random_item(self.phrases))
-            if len(self.message)<=140: break
-            
-            self.tApi.PostUpdate(self.message)
+            if len(self.message)<=140: 
+                break
+        self.tApi.PostUpdate(self.message)
 
 
 # SPAM Bot
@@ -120,9 +120,9 @@ class SpamBot(Bot):
       # Construct a 140 char message
       while (1):  
           self.message = 'Buy '+self.random_item(self.product)+' at '+self.random_item(self.retailers)
-          if len(self.message)<=140: break
-          
-          self.tApi.PostUpdate(self.message)
+          if len(self.message)<=140: 
+              break
+      self.tApi.PostUpdate(self.message)
 
     def RandomDirectTwitSpam(self,target):
       # Construct a 140 char message
@@ -131,7 +131,7 @@ class SpamBot(Bot):
                             +' at '+self.random_item(self.retailers))
             if len(self.message)<=140: break
             
-            self.tApi.PostUpdate(self.message)
+        self.tApi.PostUpdate(self.message)
 
 #
 # MegaBot

@@ -63,13 +63,14 @@ boyzoBot.Bot_sleep(12)
 while (boyzoBot.mood>0):
   subjposts = boyzoBot.twit_get_user_updates(subj,cachedtwits)
   if subjposts.count(subjlpost[0]):
-    for i in range( len(subjposts), subjposts.index(subjlpost[0]), -1):
-      subjposts.pop(i-1)
-    if not len(subjposts): subjlpost[0]=subjposts[0]
-    subjposts.reverse()
-    for s in subjposts:
-      RT_boyzo_post(subj,s.text)
-      boyzoBot.Bot_sleep(5)
+    if subjposts.index(subjlpost[0]):
+      for i in range( len(subjposts), subjposts.index(subjlpost[0]), -1):
+        subjposts.pop(i-1)
+        if not len(subjposts): subjlpost[0]=subjposts[0]
+        subjposts.reverse()
+        for s in subjposts:
+          RT_boyzo_post(subj,s.text)
+          boyzoBot.Bot_sleep(5)
   else:
     boyzoBot.twit_twit('@'+subj+' tuiteas demasiado, ya no hallo tu ultimo twit,'+
                        ' extendiendo el cache')
@@ -86,7 +87,7 @@ while (boyzoBot.mood>0):
 
   boyzoBot.Bot_sleep(12)              
   boyzoBot.RandomTwitRant()
-  boyzoBot.Bot_sleep_random(12,6)
+  boyzoBot.Bot_sleep_random(1200,60)
   boyzoBot.mood -= 1
 
 boyzoBot.twit_twit('Ya me harte, ranteo luego')
