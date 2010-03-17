@@ -17,6 +17,7 @@ subjlpost = []
 flag = [] 
 cachedtwits = 10
 
+
 boyzoBot.rants.extend(['rant!','AHH','odio esto,',
                         'no puede ser,','maldicion,','maldita sea,'
                        ])
@@ -47,14 +48,17 @@ boyzoBot.phrases.extend(['malditas suggestions de facebook',
 def RT_boyzo_post(target,messtr):
   boyzoBot.twit_twit('RT @'+target+': '+messtr)
   
-
+subjposts = boyzoBot.twit_get_user_updates(subj,cachedtwits)
 subjlpost = boyzoBot.twit_get_user_updates(subj,1)
+#subjlpost[0] = subjposts[len(subjposts)/2]
+
 RT_boyzo_post(subj,subjlpost[0].text)
 
-boyzoBot.Bot_sleep(120)
-boyzoBot.twit_twit('@boyzo te puedo retuitear, y aparte ranteo independientemente,'
-                    +' te he superado en rant')
-boyzoBot.Bot_sleep(120)
+
+#boyzoBot.Bot_sleep(12)
+#boyzoBot.twit_twit('@boyzo te puedo retuitear, y aparte ranteo independientemente,'
+#                    +' te he superado en rant')
+boyzoBot.Bot_sleep(12)
 
 while (boyzoBot.mood>0):
   subjposts = boyzoBot.twit_get_user_updates(subj,cachedtwits)
@@ -75,14 +79,15 @@ while (boyzoBot.mood>0):
     else:
       boyzoBot.twit_twit('@'+subj+' felicidades has tuiteado mas de lo que me es '+
                          'permitido trackear')
+    subjlpost = []
     subjlpost = boyzoBot.twit_get_user_updates(subj,1)
     RT_boyzo_post(subj,subjlpost[0].text)
-  boyzoBot.Bot_sleep(120)
-               
-  boyzoBot.RandomTwitRant()
-  boyzoBot.Bot_sleep_random(1200,60)
-  boyzoBot.mood -= 1
+    print subjlpost[0].text
 
+  boyzoBot.Bot_sleep(12)              
+  boyzoBot.RandomTwitRant()
+  boyzoBot.Bot_sleep_random(12,6)
+  boyzoBot.mood -= 1
 
 boyzoBot.twit_twit('Ya me harte, ranteo luego')
 
