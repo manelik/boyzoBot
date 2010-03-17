@@ -49,24 +49,27 @@ class Bot:
     message = '' # for messages construction
 
     def random_item(self,token):
-    # Picks a random item from a list
-    # token -list
-      return token[int(random.random()*len(token))]
+        # Picks a random item from a list
+        # token -list
+        return token[int(random.random()*len(token))]
 
     def twit_authenticate(self):
-      self.tApi.SetCredentials(username=self.tuser,password=self.tpass)
-
+        self.tApi.SetCredentials(username=self.tuser,password=self.tpass)
+    
     def twit_deauthenticate(self):
-      self.tApi.ClearCredentials()
-
+        self.tApi.ClearCredentials()
+    
     def twit_twit(self,token):
-      self.tApi.PostUpdate(token)
-
+        self.tApi.PostUpdate(token[0:140])
+    
+    def twit_get_user_updates(self,usrname,num):
+        return self.tApi.GetUserTimeline(user=usrname,count=num)
+    
     def Bot_sleep_random(self,ctime,sigtime):
-      time.sleep(random.gauss(mu=ctime,sigma=sigtime))
-
+        time.sleep(random.gauss(mu=ctime,sigma=sigtime))
+    
     def Bot_sleep(self,token):
-      time.sleep(token) # token in seconds
+        time.sleep(token) # token in seconds
 
 
 # DO NOT UNCOMMENT Skynet stuff
@@ -87,12 +90,21 @@ class RantBot(Bot):
     nouns = ['']
 
     def RandomTwitRant(self):
-      # Construct a 140 char message
-      while (1):  
-        self.message = 'RT @boyzo: '+self.random_item(self.rants)+' '+self.random_item(self.phrases)
-        if len(self.message)<=140: break
+        # Construct a 140 char message
+        while (1):  
+            self.message = self.random_item(self.rants)+' '+self.random_item(self.phrases)
+            if len(self.message)<=140: break
+            
+            self.tApi.PostUpdate(self.message)
 
-      self.tApi.PostUpdate(self.message)
+    def RandomFakeRTwit(self,target):
+        # Construct a 140 char message
+        while (1):  
+            self.message = ('RT @'+target+': '+self.random_item(self.rants)+
+                            ' '+self.random_item(self.phrases))
+            if len(self.message)<=140: break
+            
+            self.tApi.PostUpdate(self.message)
 
 
 # SPAM Bot
@@ -107,11 +119,31 @@ class SpamBot(Bot):
     def RandomTwitSpam(self):
       # Construct a 140 char message
       while (1):  
-        self.message = 'Buy '+self.random_item(self.product)+' at '+self.random_item(self.retailers)
-        if len(self.message)<=140: break
+          self.message = 'Buy '+self.random_item(self.product)+' at '+self.random_item(self.retailers)
+          if len(self.message)<=140: break
+          
+          self.tApi.PostUpdate(self.message)
 
-      self.tApi.PostUpdate(self.message)
+    def RandomDirectTwitSpam(self,target):
+      # Construct a 140 char message
+        while (1):  
+            self.message = ('@'+target+'  Buy '+self.random_item(self.product)
+                            +' at '+self.random_item(self.retailers))
+            if len(self.message)<=140: break
+            
+            self.tApi.PostUpdate(self.message)
 
+#
+# MegaBot
+#
+# A bot that gets the abilities of those who defeats
+# NO RECURSION PLEASE!!
 
+class MegaBot(Bot):
+    beatenBots = []    # a list of beatenBots
+    maxHP = 100.0       
+    currHp= 100.0
 
-
+    def TakePowers(self,beatBot):
+        self.beatenBots.append(beatBot)
+    
