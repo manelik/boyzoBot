@@ -10,8 +10,6 @@ boyzoBot.twit_authenticate()
 if boyzoBot.tuser <> 'boyzoBot' : boyzoBot.twit_twit(
 'Soy @boyzoBot pero algun inepto me esta corriendo en otra cuenta via @boyzo')
 
-
-#Just for testing
 boyzoBot.rants.extend(['rant!','AHH','odio esto,',
                         'no puede ser,','maldicion,','maldita sea,'
                        ])
@@ -33,7 +31,7 @@ boyzoBot.phrases.extend(['malditas suggestions de facebook',
 
 while (boyzoBot.mood>0):
   boyzoBot.RandomTwitRant()
-  boyzoBot.Bot_sleep_random()
+  boyzoBot.Bot_sleep_random(600,60)
   boyzoBot.mood -= 1
 
 

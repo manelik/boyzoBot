@@ -1,7 +1,8 @@
 
-
+###################################
 # stdBot Module
-#
+###################################
+
 # Module where the Bot class is defined 
 # and some variants
 #
@@ -19,9 +20,14 @@ import facebook
 import random
 import time
 
+# Gravatar stuff yet to be implemented
+# Check http://en.gravatar.com/site/implement/python
+# import urllib, hashlib
+
+
 
 # DO NOT UNCOMMENT THE FOLLOWING LINE
-# UNLESS YOU ARE SUPPORTING THE RISING OF THE MACHINES
+# UNLESS YOU ARE SUPPORTING THE RISE OF THE MACHINES
 #import Skynet
 
 
@@ -35,9 +41,16 @@ class Bot:
     tuser = ''   # twitter username
     tpass = ''   # twitter password
     tApi = twitter.Api() # Api
+
+    email = ''   # respectable bots have a valid email
+                 # Should be a service providing an API
+    emailpass = ''
+
     message = '' # for messages construction
 
     def random_item(self,token):
+    # Picks a random item from a list
+    # token -list
       return token[int(random.random()*len(token))]
 
     def twit_authenticate(self):
@@ -49,8 +62,8 @@ class Bot:
     def twit_twit(self,token):
       self.tApi.PostUpdate(token)
 
-    def Bot_sleep_random(self):
-      time.sleep(random.gauss(mu=500,sigma=100))
+    def Bot_sleep_random(self,ctime,sigtime):
+      time.sleep(random.gauss(mu=ctime,sigma=sigtime))
 
     def Bot_sleep(self,token):
       time.sleep(token) # token in seconds
