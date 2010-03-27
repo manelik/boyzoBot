@@ -88,6 +88,7 @@ class RantBot(Bot):
     rants = ['']
     phrases = ['']
     nouns = ['']
+    enemys = ['']
 
     def RandomTwitRant(self):
         # Construct a 140 char message
