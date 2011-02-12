@@ -10,12 +10,16 @@
 #
 # For twiting bots
 #
-import twitter
+# All the authentication is now done with oauth
+from oauth import oauth
+from oauthtwitter import OAuthApi
+#import pprint
+import os
 
 #
 # For facebookers
 #
-import facebook
+#import facebook
 
 import random
 import time
@@ -24,11 +28,11 @@ import time
 # Check http://en.gravatar.com/site/implement/python
 # import urllib, hashlib
 
-
-
-# DO NOT UNCOMMENT THE FOLLOWING LINE
-# UNLESS YOU ARE SUPPORTING THE RISE OF THE MACHINES
-#import Skynet
+# skynetready
+try:
+  import skynet
+except ImportError:
+  print 'Skynet still unavailable'
 
 
 # the Bot class
@@ -40,7 +44,12 @@ class Bot:
     mood = 10.0  # mood affects the behaviour
     tuser = ''   # twitter username
     tpass = ''   # twitter password
-    tApi = twitter.Api() # Api
+    consumer_key  = ''
+    consumer_secret = ''
+    atoken = ''
+    stoken = ''
+
+    tApi = OauthApi() # Api
 
     email = ''   # respectable bots have a valid email
                  # Should be a service providing an API
@@ -54,13 +63,13 @@ class Bot:
         return token[int(random.random()*len(token))]
 
     def twit_authenticate(self):
-        self.tApi.SetCredentials(username=self.tuser,password=self.tpass)
+        self.tApi= OauthApi(self.consumer_key, self.consumer_secret, self.atoken, self.stoken)
     
     def twit_deauthenticate(self):
         self.tApi.ClearCredentials()
     
     def twit_twit(self,token):
-        self.tApi.PostUpdate(token[0:140])
+        self.tApi.UpdateStatus(token[0:140])
     
     def twit_get_user_updates(self,usrname,num):
         return self.tApi.GetUserTimeline(user=usrname,count=num)
@@ -96,7 +105,7 @@ class RantBot(Bot):
             self.message = self.random_item(self.rants)+' '+self.random_item(self.phrases)
             if len(self.message)<=140: 
                 break
-        self.tApi.PostUpdate(self.message)
+        self.tApi.UpdateStatus(self.message)
 
     def RandomFakeRTwit(self,target):
         # Construct a 140 char message
@@ -105,7 +114,7 @@ class RantBot(Bot):
                             ' '+self.random_item(self.phrases))
             if len(self.message)<=140: 
                 break
-        self.tApi.PostUpdate(self.message)
+        self.tApi.UpdateStatus(self.message)
 
 
 # SPAM Bot
@@ -123,7 +132,7 @@ class SpamBot(Bot):
           self.message = 'Buy '+self.random_item(self.product)+' at '+self.random_item(self.retailers)
           if len(self.message)<=140: 
               break
-      self.tApi.PostUpdate(self.message)
+      self.tApi.UpdateStatus(self.message)
 
     def RandomDirectTwitSpam(self,target):
       # Construct a 140 char message
@@ -132,7 +141,7 @@ class SpamBot(Bot):
                             +' at '+self.random_item(self.retailers))
             if len(self.message)<=140: break
             
-        self.tApi.PostUpdate(self.message)
+        self.tApi.UpdateStatus(self.message)
 
 #
 # MegaBot

@@ -60,10 +60,10 @@ def RT_boyzo_post(target,messtr):
 
 
 #boyzoBot.Bot_sleep(12)
-#boyzoBot.twit_twit('@boyzo te puedo retuitear, y aparte ranteo independientemente,'
-#                    +' te he superado en rant')
+boyzoBot.twit_twit('YO NI QUERIA IR AL APICAMP!!')
+
 boyzoBot.Bot_sleep(12)
-boyzoBot.mood = 100
+#boyzoBot.mood = 100
 while (boyzoBot.mood>0):
 #  subjposts = boyzoBot.twit_get_user_updates(subj,cachedtwits)
 #  if subjposts.count(subjlpost[0]):
