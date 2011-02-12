@@ -58,26 +58,39 @@ class Bot:
     message = '' # for messages construction
 
     def random_item(self,token):
-        # Picks a random item from a list
-        # token -list
+        """Picks a random item from a list.        
+        """
         return token[int(random.random()*len(token))]
 
     def twit_authenticate(self):
+        """Begin a twitter session.
+        """
         self.tApi= OauthApi(self.consumer_key, self.consumer_secret, self.atoken, self.stoken)
     
-    def twit_deauthenticate(self):
-        self.tApi.ClearCredentials()
-    
+    def twit_deauthenticate(self):#deprecated
+        #self.tApi.ClearCredentials()
+        """Deprecated. 
+        Left for compatibility with older versions.
+        """
+        pass
     def twit_twit(self,token):
+        """Post a new status.
+        """
         self.tApi.UpdateStatus(token[0:140])
     
     def twit_get_user_updates(self,usrname,num):
+        """Get the last updates from a specific user.
+        """
         return self.tApi.GetUserTimeline(user=usrname,count=num)
     
     def Bot_sleep_random(self,ctime,sigtime):
+        """ Sleep a randomized amount of time.
+        """
         time.sleep(random.gauss(mu=ctime,sigma=sigtime))
     
     def Bot_sleep(self,token):
+        """ Sleep a fixed amount of time
+        """
         time.sleep(token) # token in seconds
 
 
@@ -100,6 +113,8 @@ class RantBot(Bot):
     enemys = ['']
 
     def RandomTwitRant(self):
+        """Generate a random rant and post it.
+        """
         # Construct a 140 char message
         while (1):  
             self.message = self.random_item(self.rants)+' '+self.random_item(self.phrases)
@@ -108,6 +123,8 @@ class RantBot(Bot):
         self.tApi.UpdateStatus(self.message)
 
     def RandomFakeRTwit(self,target):
+        """Generate a random fake retweet
+        """
         # Construct a 140 char message
         while (1):  
             self.message = ('RT @'+target+': '+self.random_item(self.rants)+

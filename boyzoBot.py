@@ -2,9 +2,28 @@ import stdBot
 
 boyzoBot = stdBot.RantBot()
 
-boyzoBot.tuser = 'boyzoBot'
-boyzoBot.tpass = ''
-boyzoBot.email = 'boyzobot@gmail.com'
+#open file containing authenticarion data
+auth_data=open('auth.info','r')
+
+plines= auth_data.readlines()
+auth_data.close()
+
+for x in plines:
+  if x.find('tuser')+1 :
+    boyzoBot.tuser = x.partition('&')[2]
+  elif x.find('')+1 :
+    boyzoBot.tpass = x.partition('&')[2]
+  elif x.find('')+1 :
+    boyzoBot.email = x.partition('&')[2]
+  elif x.find('consumerkey')+1 :
+    boyzoBot.consumer_key = x.partition('&')[2]
+  elif x.find('consumersecret')+1 :
+    boyzoBot.consumer_secret = x.partition('&')[2]
+  elif x.find('otoken')+1 :
+    boyzoBot.atoken = x.partition('&')[2]
+  elif x.find('ostoken')+1 :
+    boyzoBot.stoken = x.partition('&')[2]
+
 
 boyzoBot.twit_authenticate()
 
