@@ -14,8 +14,7 @@
 from oauth import oauth
 from oauthtwitter import OAuthApi
 #import pprint
-import os
-
+#import os
 #
 # For facebookers
 #
@@ -49,7 +48,7 @@ class Bot:
     atoken = ''
     stoken = ''
 
-    tApi = OauthApi() # Api
+    tApi = OAuthApi(consumer_key,consumer_secret) # Api
 
     email = ''   # respectable bots have a valid email
                  # Should be a service providing an API
@@ -65,7 +64,7 @@ class Bot:
     def twit_authenticate(self):
         """Begin a twitter session.
         """
-        self.tApi= OauthApi(self.consumer_key, self.consumer_secret, self.atoken, self.stoken)
+        self.tApi= OAuthApi(self.consumer_key, self.consumer_secret, self.atoken, self.stoken)
     
     def twit_deauthenticate(self):#deprecated
         #self.tApi.ClearCredentials()
