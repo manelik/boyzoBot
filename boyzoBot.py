@@ -80,10 +80,32 @@ def RT_boyzo_post(target,messtr):
 
 
 #boyzoBot.Bot_sleep(12)
-#boyzoBot.twit_twit('maldito Oauth!!')
 
-boyzoBot.Bot_sleep(12)
+
+statuses=boyzoBot.tApi.GetSearchResults({'q':'#ranteocomoboyzo','rpp':30}).pop('results')
+
+for x in statuses:
+#  RT_boyzo_post(x['from_user'],x['text'])
+  if x['from_user']<>'boyzoBot':
+    relation=boyzoBot.tApi.GetRelationship(screen_name=x['from_user']).pop('relationship')
+    if not relation['target']['followed_by'] :
+      boyzoBot.tApi.FollowUser(user_id=relation['target']['id'])
+    boyzoBot.twit_twit('ahora sigo a '+relation['target']['screen_name']+
+                       ' porque yo tambien #ranteocomoboyzo')
+    if not relation['target']['following'] :
+      boyzoBot.twit_twit(relation['target']['screen_name']+
+                         ' aplica el #ranteocomoboyzo pero no me sigue. Que mal')
+    
+
+
+#quit()
+
+
+boyzoBot.Bot_sleep(60)
 #boyzoBot.mood = 100
+
+
+
 while (boyzoBot.mood>0):
 #  subjposts = boyzoBot.twit_get_user_updates(subj,cachedtwits)
 #  if subjposts.count(subjlpost[0]):
