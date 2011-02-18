@@ -72,6 +72,7 @@ class Bot:
         Left for compatibility with older versions.
         """
         pass
+
     def twit_twit(self,token):
         """Post a new status.
         """

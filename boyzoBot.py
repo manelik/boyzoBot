@@ -20,7 +20,6 @@ for x in plines:
   elif x.find('consumersecret')+1 :
     boyzoBot.consumer_secret = x.partition('&')[2].strip()
   elif x.find('otoken')+1 :
-    print 'pass'
     boyzoBot.atoken = x.partition('&')[2].strip()
   elif x.find('ostoken')+1 :
     boyzoBot.stoken = x.partition('&')[2].strip()
@@ -62,8 +61,9 @@ boyzoBot.phrases.extend(['malditas suggestions de facebook',
                          'que quieren que trabaje todo el dia en el GAE??'+
                          ' estan mal',
                          'no tiene sentido ser Skynet ready si todavia no esta '+
-                         'funcionando!'+
-                         'ya me estan bloqueando'
+                         'funcionando!',
+                         'ya me estan bloqueando',
+                         'ya nadie se queja de que #ranteocomoboyzo'
                          ])
 
 boyzoBot.enemys.extend(['notbotBot','antibotBot'])
