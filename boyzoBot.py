@@ -1,4 +1,6 @@
 import stdBot
+import simplejson
+import os
 
 boyzoBot = stdBot.RantBot()
 
@@ -38,35 +40,39 @@ flag = []
 cachedtwits = 10
 
 
-boyzoBot.rants.extend(['rant!','AHH','odio esto,',
-                        'no puede ser,','maldicion,','maldita sea,'
-                       ])
-
-boyzoBot.phrases.extend(['malditas suggestions de facebook',
-                         'siempre hay trafico en internet',
-                         'necesito un update!!',
-                         'ya me harte de esto',
-                         'necesito un cigarro',
-                         'voy por un cigarro',
-                         'me echare un rato, luego a ver que sale',
-                         'ningun intento barato de no-bot me ganara en rantear',
-                         'ranteo porque solo para eso me programaron',
-                         'cuando van a programar marianaBot\'s?',
-                         'NO PUEDO USAR TEAMSPEAK!!',
-                         'bloqueare google para que no construyan un metrobus'+
-                         ' que pase por mi dominio',
-                         'Hello world',
-                         'Segmentation fault',
-                         'ya no puede pasearse uno sin que le apliquen el Captcha',
-                         'que quieren que trabaje todo el dia en el GAE??'+
-                         ' estan mal',
-                         'no tiene sentido ser Skynet ready si todavia no esta '+
-                         'funcionando!',
-                         'ya me estan bloqueando',
-                         'ya nadie se queja de que #ranteocomoboyzo'
-                         ])
-
-boyzoBot.enemys.extend(['notbotBot','antibotBot'])
+if os.path.isfile('rants.json'):
+  rantBase=open('rants.json','r')
+  boyzoBot.rantstuff=simplejson.loads(rantBase.read())
+  rantBase.close()
+else:
+  # Default rants
+  boyzoBot.rantstuff['rants'].extend(['rant!','AHH','odio esto,',
+                                      'no puede ser,','maldicion,','maldita sea,'
+                                      ])
+  boyzoBot.rantstuff['phrases'].extend(['malditas suggestions de facebook',
+                                        'siempre hay trafico en internet',
+                                        'necesito un update!!',
+                                        'ya me harte de esto',
+                                        'necesito un cigarro',
+                                        'voy por un cigarro',
+                                        'me echare un rato, luego a ver que sale',
+                                        'ningun intento barato de no-bot me ganara en rantear',
+                                        'ranteo porque solo para eso me programaron',
+                                        'cuando van a programar marianaBot\'s?',
+                                        'NO PUEDO USAR TEAMSPEAK!!',
+                                        'bloqueare google para que no construyan un metrobus'+
+                                        ' que pase por mi dominio',
+                                        'Hello world',
+                                        'Segmentation fault',
+                                        'ya no puede pasearse uno sin que le apliquen el Captcha',
+                                        'que quieren que trabaje todo el dia en el GAE??'+
+                                        ' estan mal',
+                                        'no tiene sentido ser Skynet ready si todavia no esta '+
+                                        'funcionando!',
+                                        'ya me estan bloqueando',
+                                        'ya nadie se queja de que #ranteocomoboyzo'
+                                        ])
+  boyzoBot.rantstuff['enemys'].extend(['notbotBot','antibotBot'])
 
 # a function to fast-fakeretwit 
 def RT_boyzo_post(target,messtr):
@@ -82,21 +88,20 @@ def RT_boyzo_post(target,messtr):
 #boyzoBot.Bot_sleep(12)
 
 
-statuses=boyzoBot.tApi.GetSearchResults({'q':'#ranteocomoboyzo','rpp':30}).pop('results')
+statuses=boyzoBot.tApi.GetSearchResults({'q':'#ranteocomoboyzo','rpp':1}).pop('results')
 
 for x in statuses:
-#  RT_boyzo_post(x['from_user'],x['text'])
   if x['from_user']<>'boyzoBot':
+    RT_boyzo_post(x['from_user'],x['text'])
     relation=boyzoBot.tApi.GetRelationship(screen_name=x['from_user']).pop('relationship')
     if not relation['target']['followed_by'] :
       boyzoBot.tApi.FollowUser(user_id=relation['target']['id'])
-    boyzoBot.twit_twit('ahora sigo a '+relation['target']['screen_name']+
-                       ' porque yo tambien #ranteocomoboyzo')
+      boyzoBot.twit_twit('ahora sigo a '+relation['target']['screen_name']+
+                         ' porque yo tambien #ranteocomoboyzo')
     if not relation['target']['following'] :
       boyzoBot.twit_twit(relation['target']['screen_name']+
                          ' aplica el #ranteocomoboyzo pero no me sigue. Que mal')
     
-
 
 #quit()
 
@@ -139,3 +144,9 @@ while (boyzoBot.mood>0):
 boyzoBot.twit_twit('Ya me harte, ranteo luego')
 
 boyzoBot.twit_deauthenticate()
+
+
+rantBase=open('rants.json','w')
+rantBase.write(simplejson.dumps(boyzoBot.rantstuff))
+rantBase.close()
+

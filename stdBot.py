@@ -40,6 +40,15 @@ class Bot:
 
     # its supposed that all bots will interact using twitter and
     # facebook apps
+
+#    tw_data={'mood':10,   # mood affects the behaviour
+#             'tuser':'',   # twitter username
+#             'tpass':'',   # twitter password
+#             'consumer_key':'',
+#             'consumer_secret':'',
+#             'atoken':'',
+#             'stoken':''}
+
     mood = 10.0  # mood affects the behaviour
     tuser = ''   # twitter username
     tpass = ''   # twitter password
@@ -107,17 +116,18 @@ class Bot:
 
 class RantBot(Bot):
     # some string lists so it can play with them
-    rants = ['']
-    phrases = ['']
-    nouns = ['']
-    enemys = ['']
+    rantstuff={ 'rants':[''],
+                'phrases':[''],
+                'nouns':[''],
+                'enemys':['']}
 
     def RandomTwitRant(self):
         """Generate a random rant and post it.
         """
         # Construct a 140 char message
         while (1):  
-            self.message = self.random_item(self.rants)+' '+self.random_item(self.phrases)
+            self.message = (self.random_item(self.rantstuf['rants'])+' '
+                            +self.random_item(self.rantstuff['phrases']))
             if len(self.message)<=140: 
                 break
         self.tApi.UpdateStatus(self.message)
@@ -127,8 +137,8 @@ class RantBot(Bot):
         """
         # Construct a 140 char message
         while (1):  
-            self.message = ('RT @'+target+': '+self.random_item(self.rants)+
-                            ' '+self.random_item(self.phrases))
+            self.message = ('RT @'+target+': '+self.random_item(self.rantstuff['rants'])+
+                            ' '+self.random_item(self.rantstuff['phrases']))
             if len(self.message)<=140: 
                 break
         self.tApi.UpdateStatus(self.message)
