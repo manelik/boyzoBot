@@ -101,6 +101,26 @@ for x in statuses:
     if not relation['target']['following'] :
       boyzoBot.twit_twit(relation['target']['screen_name']+
                          ' aplica el #ranteocomoboyzo pero no me sigue. Que mal')
+
+statuses=boyzoBot.tApi.GetSearchResults({'q':'@boyzoBot','rpp':1}).pop('results')
+
+for x in statuses:
+  if x['from_user']<>'boyzoBot': #boyzoBot doesn't talk with himself (in public)
+    if x['text'].startswith('@boyzobot'): #that means a messsage, reply
+      if x['text'].endswith('?'): #this is a explicit question
+        wordlist=x['text'][:-2]
+        wordlist=wordlist.split( )[1:]
+        magicword=''
+        for word in wordlist:
+          if len(word)>4:
+            magicword=word
+            break
+        boyzoBot.twit_twit('@'+x['from_user']+' tu no '+magicword+' #n00b')
+#        boyzoBot.twit_twit('@'+x['from_user']+' estoy muy ocupado como para contestarte #n00b')
+    elif x['text'].startswith('RT @boyzoBot'): 
+      pass
+    else:
+      boyzoBot.twit_twit('@'+x['from_user']+' no entiendo tu twitt, #ranteocomoboyzo')
     
 
 #quit()

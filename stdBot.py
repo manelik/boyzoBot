@@ -126,7 +126,7 @@ class RantBot(Bot):
         """
         # Construct a 140 char message
         while (1):  
-            self.message = (self.random_item(self.rantstuf['rants'])+' '
+            self.message = (self.random_item(self.rantstuff['rants'])+' '
                             +self.random_item(self.rantstuff['phrases']))
             if len(self.message)<=140: 
                 break
