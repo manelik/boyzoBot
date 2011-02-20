@@ -106,7 +106,7 @@ statuses=boyzoBot.tApi.GetSearchResults({'q':'@boyzoBot','rpp':1}).pop('results'
 
 for x in statuses:
   if x['from_user']<>'boyzoBot': #boyzoBot doesn't talk with himself (in public)
-    if x['text'].startswith('@boyzobot'): #that means a messsage, reply
+    if x['text'].startswith('@boyzoBot'): #that means a messsage, reply
       if x['text'].endswith('?'): #this is a explicit question
         wordlist=x['text'][:-2]
         wordlist=wordlist.split( )[1:]
