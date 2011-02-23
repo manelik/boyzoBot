@@ -78,15 +78,8 @@ else:
 def RT_boyzo_post(target,messtr):
   boyzoBot.twit_twit('RT @'+target+': '+messtr)
   
-#subjposts = boyzoBot.twit_get_user_updates(subj,cachedtwits)#
-#subjlpost = boyzoBot.twit_get_user_updates(subj,1)
-#subjlpost[0] = subjposts[len(subjposts)/2]
-
-#RT_boyzo_post(subj,subjlpost[0].text)
-
 
 #boyzoBot.Bot_sleep(12)
-
 
 statuses=boyzoBot.tApi.GetSearchResults({'q':'#ranteocomoboyzo','rpp':1}).pop('results')
 
@@ -132,29 +125,6 @@ boyzoBot.Bot_sleep(60)
 
 
 while (boyzoBot.mood>0):
-#  subjposts = boyzoBot.twit_get_user_updates(subj,cachedtwits)
-#  if subjposts.count(subjlpost[0]):
-#    if subjposts.index(subjlpost[0]):
-#      for i in range( len(subjposts), subjposts.index(subjlpost[0]), -1):
-#        subjposts.pop(i-1)
-#        if not len(subjposts): subjlpost[0]=subjposts[0]
-#        subjposts.reverse()
-#        for s in subjposts:
-#          RT_boyzo_post(subj,s.text)
-#          boyzoBot.Bot_sleep(5)
-#  else:
-#    boyzoBot.twit_twit('@'+subj+' tuiteas demasiado, ya no hallo tu ultimo twit,'+
-#                       ' extendiendo el cache')
-#    boyzoBot.sleep(5)
-#    if cachedtwits < 100 : 
-#      cachedtwits += 10
-#    else:
-#      boyzoBot.twit_twit('@'+subj+' felicidades has tuiteado mas de lo que me es '+
-#                         'permitido trackear')
-#    subjlpost = []
-#    subjlpost = boyzoBot.twit_get_user_updates(subj,1)
-#    RT_boyzo_post(subj,subjlpost[0].text)
-#    print subjlpost[0].text
 
   boyzoBot.Bot_sleep(12)              
   boyzoBot.RandomTwitRant()
