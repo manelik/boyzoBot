@@ -118,8 +118,8 @@ class RantBot(Bot):
     # some string lists so it can play with them
     rantstuff={ 'rants':[''],
                 'phrases':[''],
-                'nouns':[''],
-                'enemys':['']}
+                'nouns':[],
+                'enemys':[]}
 
     def RandomTwitRant(self):
         """Generate a random rant and post it.

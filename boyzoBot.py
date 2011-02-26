@@ -33,15 +33,16 @@ if boyzoBot.tuser <> 'boyzoBot' : boyzoBot.twit_twit(
   'Soy @boyzoBot pero algun inepto me esta corriendo en otra cuenta via @boyzo')
 
 # Declaring some useful vars
-subj = 'boyzo'
-subjposts = []
-subjlpost = []
-flag = [] 
-cachedtwits = 10
+#subj = 'boyzo'
+#subjposts = []
+#subjlpost = []
+#flag = [] 
+#cachedtwits = 10
 
 
-if os.path.isfile('rants.json'):
-  rantBase=open('rants.json','r')
+
+if os.path.isfile('rantsgdl.json'):
+  rantBase=open('rantsgdl.json','r')
   boyzoBot.rantstuff=simplejson.loads(rantBase.read())
   rantBase.close()
 else:
@@ -74,6 +75,9 @@ else:
                                         ])
   boyzoBot.rantstuff['enemys'].extend(['notbotBot','antibotBot'])
 
+
+#boyzoBot.rantstuff.update({ranters:[]})
+
 # a function to fast-fakeretwit 
 def RT_boyzo_post(target,messtr):
   boyzoBot.twit_twit('RT @'+target+': '+messtr)
@@ -81,50 +85,62 @@ def RT_boyzo_post(target,messtr):
 
 #boyzoBot.Bot_sleep(12)
 
-statuses=boyzoBot.tApi.GetSearchResults({'q':'#ranteocomoboyzo','rpp':1}).pop('results')
-
-for x in statuses:
-  if x['from_user']<>'boyzoBot':
-    RT_boyzo_post(x['from_user'],x['text'])
-    relation=boyzoBot.tApi.GetRelationship(screen_name=x['from_user']).pop('relationship')
-    if not relation['target']['followed_by'] :
-      boyzoBot.tApi.FollowUser(user_id=relation['target']['id'])
-      boyzoBot.twit_twit('ahora sigo a '+relation['target']['screen_name']+
-                         ' porque yo tambien #ranteocomoboyzo')
-    if not relation['target']['following'] :
-      boyzoBot.twit_twit(relation['target']['screen_name']+
-                         ' aplica el #ranteocomoboyzo pero no me sigue. Que mal')
-
-statuses=boyzoBot.tApi.GetSearchResults({'q':'@boyzoBot','rpp':1}).pop('results')
-
-for x in statuses:
-  if x['from_user']<>'boyzoBot': #boyzoBot doesn't talk with himself (in public)
-    if x['text'].startswith('@boyzoBot'): #that means a messsage, reply
-      if x['text'].endswith('?'): #this is a explicit question
-        wordlist=x['text'][:-2]
-        wordlist=wordlist.split( )[1:]
-        magicword=''
-        for word in wordlist:
-          if len(word)>4:
-            magicword=word
-            break
-        boyzoBot.twit_twit('@'+x['from_user']+' tu no '+magicword+' #n00b')
-#        boyzoBot.twit_twit('@'+x['from_user']+' estoy muy ocupado como para contestarte #n00b')
-    elif x['text'].startswith('RT @boyzoBot'): 
-      pass
-    else:
-      boyzoBot.twit_twit('@'+x['from_user']+' no entiendo tu twitt, #ranteocomoboyzo')
     
 
 #quit()
 
 
 boyzoBot.Bot_sleep(60)
-#boyzoBot.mood = 100
 
+
+boyzoBot.mood = 100
 
 
 while (boyzoBot.mood>0):
+
+  statuses=boyzoBot.tApi.GetSearchResults({'q':'#ranteocomoboyzo','rpp':5}).pop('results')
+  
+  for x in statuses:
+    if x['from_user']<>'boyzoBot':
+      RT_boyzo_post(x['from_user'],x['text'])
+      wordlist=x['text']
+      wordlist=wordlist.split()
+      for word in wordlist:
+        if len(word)>4 :
+          if boyzoBot.rantstuff['nouns'].count(word)==0:
+            boyzoBot.rantstuff['nouns'].append(word)
+        
+      if boyzoBot.rantstuff['ranters'].count(x['from_user'])==0:
+        boyzoBot.rantstuff['ranters'].append(x['from_user'])
+      relation=boyzoBot.tApi.GetRelationship(screen_name=x['from_user']).pop('relationship')
+      if not relation['target']['followed_by'] :
+        boyzoBot.tApi.FollowUser(user_id=relation['target']['id'])
+        boyzoBot.twit_twit('ahora sigo a '+relation['target']['screen_name']+
+                           ' porque yo tambien #ranteocomoboyzo')
+        if not relation['target']['following'] :
+          boyzoBot.twit_twit(relation['target']['screen_name']+
+                             ' aplica el #ranteocomoboyzo pero no me sigue. Que mal')
+
+  statuses=boyzoBot.tApi.GetSearchResults({'q':'@boyzoBot','rpp':1}).pop('results')
+
+  for x in statuses:
+    if x['from_user']<>'boyzoBot': #boyzoBot doesn't talk with himself (in public)
+      if x['text'].startswith('@boyzoBot'): #that means a messsage, reply
+        if x['text'].endswith('?'): #this is a explicit question
+          wordlist=x['text'][:-2]
+          wordlist=wordlist.split( )[1:]
+          magicword=''
+          for word in wordlist:
+            if len(word)>4:
+              magicword=word
+              break
+            boyzoBot.twit_twit('@'+x['from_user']+' tu no '+magicword+' #n00b')
+    #        boyzoBot.twit_twit('@'+x['from_user']+' estoy muy ocupado como para contestarte #n00b')
+        elif x['text'].startswith('RT @boyzoBot'): 
+          pass
+        else:
+          boyzoBot.twit_twit('@'+x['from_user']+' no entiendo tu twitt, #ranteocomoboyzo')
+
 
   boyzoBot.Bot_sleep(12)              
   boyzoBot.RandomTwitRant()
@@ -136,7 +152,7 @@ boyzoBot.twit_twit('Ya me harte, ranteo luego')
 boyzoBot.twit_deauthenticate()
 
 
-rantBase=open('rants.json','w')
+rantBase=open('rantsgdl.json','w')
 rantBase.write(simplejson.dumps(boyzoBot.rantstuff))
 rantBase.close()
 
