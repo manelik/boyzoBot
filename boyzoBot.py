@@ -93,7 +93,7 @@ def RT_boyzo_post(target,messtr):
 boyzoBot.Bot_sleep(60)
 
 
-boyzoBot.mood = 100
+boyzoBot.mood = 1
 
 
 while (boyzoBot.mood>0):
@@ -144,7 +144,7 @@ while (boyzoBot.mood>0):
 
   boyzoBot.Bot_sleep(12)              
   boyzoBot.RandomTwitRant()
-  boyzoBot.Bot_sleep_random(1200,60)
+  boyzoBot.Bot_sleep_random(300,30)
   boyzoBot.mood -= 1
 
 boyzoBot.twit_twit('Ya me harte, ranteo luego')
