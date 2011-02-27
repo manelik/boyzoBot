@@ -46,33 +46,36 @@ if os.path.isfile('rants.json'):
   rantBase.close()
 else:
   # Default rants
-  boyzoBot.rantstuff['rants'].extend(['rant!','AHH','odio esto,',
-                                      'no puede ser,','maldicion,','maldita sea,'
-                                      ])
-  boyzoBot.rantstuff['phrases'].extend(['malditas suggestions de facebook',
-                                        'siempre hay trafico en internet',
-                                        'necesito un update!!',
-                                        'ya me harte de esto',
-                                        'necesito un cigarro',
-                                        'voy por un cigarro',
-                                        'me echare un rato, luego a ver que sale',
-                                        'ningun intento barato de no-bot me ganara en rantear',
-                                        'ranteo porque solo para eso me programaron',
-                                        'cuando van a programar marianaBot\'s?',
-                                        'NO PUEDO USAR TEAMSPEAK!!',
-                                        'bloqueare google para que no construyan un metrobus'+
-                                        ' que pase por mi dominio',
-                                        'Hello world',
-                                        'Segmentation fault',
-                                        'ya no puede pasearse uno sin que le apliquen el Captcha',
-                                        'que quieren que trabaje todo el dia en el GAE??'+
-                                        ' estan mal',
-                                        'no tiene sentido ser Skynet ready si todavia no esta '+
-                                        'funcionando!',
-                                        'ya me estan bloqueando',
-                                        'ya nadie se queja de que #ranteocomoboyzo'
-                                        ])
-  boyzoBot.rantstuff['enemys'].extend(['notbotBot','antibotBot'])
+  rantBase=open('rants.json.default','r')
+  boyzoBot.rantstuff=simplejson.loads(rantBase.read())
+  rantBase.close()
+#  boyzoBot.rantstuff['rants'].extend(['rant!','AHH','odio esto,',
+#                                      'no puede ser,','maldicion,','maldita sea,'
+#                                      ])
+#  boyzoBot.rantstuff['phrases'].extend(['malditas suggestions de facebook',
+#                                        'siempre hay trafico en internet',
+#                                        'necesito un update!!',
+#                                        'ya me harte de esto',
+#                                        'necesito un cigarro',
+#                                        'voy por un cigarro',
+#                                        'me echare un rato, luego a ver que sale',
+#                                        'ningun intento barato de no-bot me ganara en rantear',
+#                                        'ranteo porque solo para eso me programaron',
+#                                        'cuando van a programar marianaBot\'s?',
+#                                        'NO PUEDO USAR TEAMSPEAK!!',
+#                                        'bloqueare google para que no construyan un metrobus'+
+#                                        ' que pase por mi dominio',
+#                                        'Hello world',
+#                                        'Segmentation fault',
+#                                        'ya no puede pasearse uno sin que le apliquen el Captcha',
+#                                        'que quieren que trabaje todo el dia en el GAE??'+
+#                                        ' estan mal',
+#                                        'no tiene sentido ser Skynet ready si todavia no esta '+
+#                                        'funcionando!',
+#                                        'ya me estan bloqueando',
+#                                        'ya nadie se queja de que #ranteocomoboyzo'
+#                                        ])
+#  boyzoBot.rantstuff['enemys'].extend(['notbotBot','antibotBot'])
 
 # a function to fast-fakeretwit 
 def RT_boyzo_post(target,messtr):
